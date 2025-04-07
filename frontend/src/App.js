@@ -108,7 +108,7 @@ function App() {
     const now = Date.now();
     const lastClickTime = lastClickTimeRef.current;
   
-    const AGENCIES = [87, 83, 51];
+    const AGENCIES = [87, 83, 51, 11, 68, 127];
     const uniqueLines = getUniqueLines();
   
     if (lastClickTime && now - lastClickTime < 300) {
