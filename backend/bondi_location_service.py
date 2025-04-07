@@ -22,25 +22,30 @@ def obtener_ubicaciones():
 
     try:
         res = requests.get(url)
-        data = res.json()
+        with open("response.json", "w", encoding="utf-8") as archivo:
+            json.dump(res.json(), archivo, ensure_ascii=False, indent=4)
     except Exception as e:
-        print(f"[Error] al obtener datos de la API: {e}")
+        print(f"[Error] al guardar la respuesta: {e}")
         return []
 
     try:
+        with open("response.json", "r", encoding="utf-8") as archivo:
+            data = json.load(archivo)
+
         if isinstance(data, list) and len(data) > 0:
             for item in data:
-                ubicaciones.append({
-                    "route_short_name": item["route_short_name"],
-                    "agency_id": item["agency_id"],
-                    "latitude": item["latitude"],
-                    "longitude": item["longitude"],
-                    "timestamp": datetime.datetime.fromtimestamp(item["timestamp"]).strftime("%H:%M:%S"),
-                    "trip_headsign": item["trip_headsign"]
-                })
+                # if (item.get("route_id") in ROUTES) or (item.get("agency_id") in AGENCIES):
+                    ubicaciones.append({
+                        "route_short_name": item["route_short_name"],
+                        "agency_id": item["agency_id"],
+                        "latitude": item["latitude"],
+                        "longitude": item["longitude"],
+                        "timestamp": datetime.datetime.fromtimestamp(item["timestamp"]).strftime("%H:%M:%S"),
+                        "trip_headsign": item["trip_headsign"]
+                    })
         else:
             print("[Aviso] No se encontraron vehículos.")
     except Exception as e:
-        print(f"[Error] al procesar los datos: {e}")
+        print(f"[Error] al leer el archivo JSON: {e}")
 
     return ubicaciones
