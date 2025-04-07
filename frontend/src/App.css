@@ -1,0 +1,179 @@
+html, body, #root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.app-header {
+  height: 60px;
+  color: white;
+  padding: 0 15px;
+  text-align: center;
+  font-size: 1.2rem;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-shadow: 1px 1px 3px rgba(255, 255, 255, 0.8);
+  -webkit-text-stroke: 0.6px gray; 
+  text-stroke: 0.6px gray;
+
+  background: linear-gradient(
+    270deg,
+    red,
+    orange,
+    yellow,
+    green,
+    cyan,
+    blue,
+    indigo,
+    violet,
+    magenta,
+    red
+  );
+  background-size: 2000% 2000%;
+  animation: rainbowMove 20s reverse infinite;
+}
+
+@keyframes rainbowMove {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 100% 50%;
+  }
+}
+
+.app-body {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.map-container {
+  flex: 1;
+  height: 100%;
+  position: relative;
+}
+
+.sidebar {
+  background-color: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(4px);
+  padding: 15px;
+  overflow-y: auto;
+  width: 220px;
+  max-height: 100vh;
+  position: absolute;
+  right: 0;
+  top: 60px;
+  z-index: 1000;
+  transition: all 0.3s ease;
+}
+
+
+.button-group {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center; 
+}
+
+.button-group button {
+  width: 87%;
+  padding: 6px 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+
+@media (max-width: 992px) {
+  .sidebar {
+    width: 160px;
+  }
+}
+
+@media (max-width: 768px) {
+  .sidebar {
+    width: 100%;
+    left: 0;
+    right: 0;
+    height: auto;
+    max-height: 120px; 
+    border-left: none;
+    border-top: 1px solid #ccc;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    gap: 5px;
+    box-sizing: border-box;
+    justify-content: center;
+  }
+}
+
+.sidebar h3 {
+  margin-top: 0;
+  font-size: 1rem;
+}
+
+.line-checkbox {
+  display: flex;
+  align-items: center;
+  margin: 8px 0;
+}
+
+.line-checkbox input {
+  margin-right: 10px;
+}
+
+.error-msg {
+  color: red;
+  padding: 10px;
+  font-weight: bold;
+}
+
+.bondi-icon-container {
+  position: relative;
+  text-align: center;
+}
+
+.bondi-icon-img {
+  width: 26px;
+  height: 26px;
+  display: block;
+  margin: 0 auto;
+}
+
+.bondi-icon-label {
+  font-size: 10px;
+  color: #fff;
+  font-weight: bold;
+  padding: 2px 4px;
+  border-radius: 4px;
+  margin-bottom: 2px;
+}
+
+.bondi-icon-outdated {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  width: 16px;
+  height: 16px;
+}
+
+.search-input {
+  width: 80%;
+  padding: 6px 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+}
