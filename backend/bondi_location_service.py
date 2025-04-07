@@ -15,6 +15,7 @@ AGENCIES = [87, 83, 51]
 def obtener_ubicaciones():
     ubicaciones = []
 
+    # Obtener y guardar la respuesta en el archivo
     url = (
         f"https://apitransporte.buenosaires.gob.ar/colectivos/vehiclePositionsSimple"
         f"?client_id={CLIENT_ID}&client_secret={CLIENT_SECRET}"
@@ -28,6 +29,7 @@ def obtener_ubicaciones():
         print(f"[Error] al guardar la respuesta: {e}")
         return []
 
+    # Leer desde el archivo response.json
     try:
         with open("response.json", "r", encoding="utf-8") as archivo:
             data = json.load(archivo)
