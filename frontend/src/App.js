@@ -47,7 +47,7 @@ function App() {
 
   useEffect(() => {
     const fetchBondis = () => {
-      fetch(process.env.REACT_APP_API_URL || "/api/bondis")
+      fetch("/api/bondis")
         .then((res) => res.json())
         .then((data) => {
           if (data.message) {
