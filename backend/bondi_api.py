@@ -6,6 +6,10 @@ import os
 app = Flask(__name__)
 CORS(app)
 
+@app.route("/")
+def home():
+    return "<h1>🚍 API de Bondiolita funcionando correctamente</h1>", 200
+
 @app.route("/api/bondis", methods=["GET"])
 def get_bondis():
     ubicaciones = obtener_ubicaciones()
