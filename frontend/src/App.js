@@ -4,7 +4,6 @@ import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import "./App.css";
 
-// Genera color a partir del texto
 const stringToColor = (linea, direccion) => {
   const combinedString = linea + direccion;
   let hash = 0;
@@ -12,10 +11,9 @@ const stringToColor = (linea, direccion) => {
     hash = combinedString.charCodeAt(i) + ((hash << 5) - hash);
   }
 
-  // Convert hash to HSL for better control over color brightness
   const hue = Math.abs(hash) % 360;
-  const saturation = 70; // % de saturación (intensidad del color)
-  const lightness = 50;  // % de claridad (ni muy claro ni muy oscuro)
+  const saturation = 70;
+  const lightness = 50; 
 
   return `hsl(${hue}, ${saturation}%, ${lightness}%)`;
 };
@@ -45,11 +43,11 @@ function App() {
   const [error, setError] = useState("");
   const [visibleLines, setVisibleLines] = useState({});
   const [searchLinea, setSearchLinea] = useState("");
-  const lastClickTimeRef = useRef(null); // Para manejar doble click
+  const lastClickTimeRef = useRef(null);
 
   useEffect(() => {
     const fetchBondis = () => {
-      fetch("/api/bondis" || process.env.REACT_APP_API_URL)
+      fetch(process.env.REACT_APP_API_URL || "/api/bondis")
         .then((res) => res.json())
         .then((data) => {
           if (data.message) {
@@ -73,9 +71,19 @@ function App() {
 
   const isOutdated = (timestamp) => {
     const now = new Date();
-    const lastUpdate = new Date(timestamp);
-    return (now - lastUpdate) / 1000 / 60 > 2;
-  };
+
+    const timestampParts = timestamp.split(":");
+    const hours = parseInt(timestampParts[0], 10);
+    const minutes = parseInt(timestampParts[1], 10);
+
+    const fullTimestamp = new Date(now.getFullYear(), now.getMonth(), now.getDate(), hours, minutes, 0); 
+    
+    if (isNaN(fullTimestamp.getTime())) return true;  
+
+    const timeDifferenceInMinutes = (now - fullTimestamp) / 1000 / 60;
+
+    return timeDifferenceInMinutes > 5;  
+};
 
   const handleCheckboxChange = (linea) => {
     setVisibleLines((prev) => ({
@@ -94,7 +102,6 @@ function App() {
       all[linea] = true;
     });
     setVisibleLines(all);
-    console.log("Tildando todas las líneas");
   };
 
   const handleClearOrAgencyFilter = () => {
@@ -107,7 +114,7 @@ function App() {
     if (lastClickTime && now - lastClickTime < 300) {
       console.log("Doble click detectado");
   
-      lastClickTimeRef.current = 0; // evitar conflictos
+      lastClickTimeRef.current = 0;
   
       const visibles = {};
   
@@ -130,7 +137,6 @@ function App() {
       });
   
     } else {
-      console.log("Click simple - limpiando todo");
       lastClickTimeRef.current = now;
   
       setVisibleLines((prev) => {
