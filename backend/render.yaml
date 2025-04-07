@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: bondi-api
+    env: python
+    buildCommand: ""
+    startCommand: "python bondi_api.py"
+    envVars:
+      - key: CLIENT_ID
+        value: TU_CLIENT_ID
+      - key: CLIENT_SECRET
+        value: TU_CLIENT_SECRET
