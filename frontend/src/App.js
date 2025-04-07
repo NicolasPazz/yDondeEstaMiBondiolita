@@ -47,7 +47,7 @@ function App() {
 
   useEffect(() => {
     const fetchBondis = () => {
-      fetch("/api/bondis")
+      fetch("https://ydondeestamibondiolita.onrender.com/api/bondis")
         .then((res) => res.json())
         .then((data) => {
           if (data.message) {

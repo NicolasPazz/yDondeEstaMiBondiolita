@@ -26,6 +26,10 @@ app.get("/api/bondis", async (req, res) => {
   }
 });
 
+app.get("/test", (req, res) => {
+    res.json({ message: "Test OK" });
+  });
+
 const port = process.env.PORT || 5000;
 app.listen(port, "0.0.0.0", () => {
   console.log(`Servidor corriendo en el puerto ${port}`);
