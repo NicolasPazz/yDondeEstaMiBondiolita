@@ -3,21 +3,7 @@ import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import "./App.css";
-
-const stringToColor = (linea, direccion) => {
-  const combinedString = linea + direccion;
-  let hash = 0;
-  for (let i = 0; i < combinedString.length; i++) {
-    hash = combinedString.charCodeAt(i) + ((hash << 5) - hash);
-  }
-
-  const hue = Math.abs(hash) % 360;
-  const saturation = 70;
-  const lightness = 50; 
-
-  return `hsl(${hue}, ${saturation}%, ${lightness}%)`;
-};
-
+import { stringToColor } from "./colors";
 
 const createBondiIcon = (linea, direccion, isOutdated) => {
   const bgColor = stringToColor(linea, direccion);
