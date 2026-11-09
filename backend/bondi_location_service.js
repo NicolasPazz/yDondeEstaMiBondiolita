@@ -41,7 +41,7 @@ async function obtenerUbicaciones() {
       console.log(`[Error] La API respondió con un error. Código: ${res.status}`);
     }
   } catch (error) {
-    console.log(`[Error] Error al hacer la solicitud a la API: ${error}`);
+    throw new Error(`Error al hacer la solicitud a la API: ${error.message}`);
   }
 
   return ubicaciones;
