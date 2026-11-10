@@ -12,6 +12,10 @@ const AGENCIES = [87, 83, 51];
 async function obtenerUbicaciones() {
   const ubicaciones = [];
 
+  if (!CLIENT_ID || !CLIENT_SECRET) {
+    throw new Error("Faltan CLIENT_ID y/o CLIENT_SECRET en el archivo .env");
+  }
+
   const url = `https://apitransporte.buenosaires.gob.ar/colectivos/vehiclePositionsSimple?client_id=${CLIENT_ID}&client_secret=${CLIENT_SECRET}`;
 
   try {
