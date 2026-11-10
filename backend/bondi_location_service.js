@@ -29,7 +29,7 @@ async function obtenerUbicaciones() {
             agency_id: item.agency_id,
             latitude: item.latitude,
             longitude: item.longitude,
-            timestamp: new Date(item.timestamp * 1000).toLocaleTimeString("en-US", { hour12: false }),
+            timestamp: new Date(item.timestamp * 1000).toLocaleTimeString("en-US", { hourCycle: "h23", timeZone: "America/Argentina/Buenos_Aires" }),
             trip_headsign: item.trip_headsign,
           });
           // }
