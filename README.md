@@ -29,6 +29,8 @@ npm install
 npm start
 ```
 
+The frontend calls the Render deployment by default. Set `REACT_APP_API_URL` to use another backend, e.g. `REACT_APP_API_URL=/api/bondis` to reach the local one through the dev server proxy.
+
 ## Tests
 
 ```bash

@@ -5,6 +5,9 @@ import "leaflet/dist/leaflet.css";
 import "./App.css";
 import { stringToColor } from "./colors";
 
+const API_URL =
+  process.env.REACT_APP_API_URL || "https://ydondeestamibondiolita.onrender.com/api/bondis";
+
 const createBondiIcon = (linea, direccion, isOutdated) => {
   const bgColor = stringToColor(linea, direccion);
   return L.divIcon({
@@ -33,7 +36,7 @@ function App() {
 
   useEffect(() => {
     const fetchBondis = () => {
-      fetch("https://ydondeestamibondiolita.onrender.com/api/bondis")
+      fetch(API_URL)
         .then((res) => res.json())
         .then((data) => {
           if (data.message) {
