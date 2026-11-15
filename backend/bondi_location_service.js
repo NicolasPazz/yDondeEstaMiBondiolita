@@ -16,10 +16,13 @@ async function obtenerUbicaciones() {
     throw new Error("Faltan CLIENT_ID y/o CLIENT_SECRET en el archivo .env");
   }
 
-  const url = `https://apitransporte.buenosaires.gob.ar/colectivos/vehiclePositionsSimple?client_id=${CLIENT_ID}&client_secret=${CLIENT_SECRET}`;
+  const url = "https://apitransporte.buenosaires.gob.ar/colectivos/vehiclePositionsSimple";
 
   try {
-    const res = await axios.get(url, { timeout: REQUEST_TIMEOUT_MS });
+    const res = await axios.get(url, {
+      params: { client_id: CLIENT_ID, client_secret: CLIENT_SECRET },
+      timeout: REQUEST_TIMEOUT_MS,
+    });
 
     if (res.status === 200) {
       const data = res.data;
