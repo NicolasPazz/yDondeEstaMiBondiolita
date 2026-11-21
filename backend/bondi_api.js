@@ -3,7 +3,10 @@ const cors = require("cors");
 const { obtenerUbicaciones } = require("./bondi_location_service");
 const app = express();
 
-app.use(cors());
+const allowedOrigins = process.env.CORS_ORIGIN
+  ? process.env.CORS_ORIGIN.split(",").map((o) => o.trim()).filter(Boolean)
+  : null;
+app.use(cors(allowedOrigins && allowedOrigins.length ? { origin: allowedOrigins } : undefined));
 
 app.get("/", (req, res) => {
   res.status(200).send("<h1>🚍 API de Bondiolita funcionando correctamente</h1>");
